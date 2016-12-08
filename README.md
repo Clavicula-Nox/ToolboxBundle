@@ -1,4 +1,4 @@
-CNToolboxBundle
+ToolboxBundle
 ===================
 
 [![Symfony](https://img.shields.io/badge/Symfony-%202.7%20and%203.x-green.svg "Supports Symfony 2.7 and 3.x")](https://symfony.com/)
@@ -37,7 +37,7 @@ class AppKernel extends Kernel
     {
         $bundles = array(
             // ...
-            new ClaviculaNox\CNToolboxBundle\CNToolboxBundle(),
+            new ClaviculaNox\ToolboxBundle\ToolboxBundle(),
         );
     }
 

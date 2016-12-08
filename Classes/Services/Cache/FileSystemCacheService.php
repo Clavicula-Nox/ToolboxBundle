@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Classes\Services\Cache;
+namespace ClaviculaNox\ToolboxBundle\Classes\Services\Cache;
 
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class FileSystemCacheService
- * @package ClaviculaNox\CNToolboxBundle\Classes\Services\Cache
+ * @package ClaviculaNox\ToolboxBundle\Classes\Services\Cache
  */
 class FileSystemCacheService
 {

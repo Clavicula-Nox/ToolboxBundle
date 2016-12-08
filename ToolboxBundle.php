@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle;
+namespace ClaviculaNox\ToolboxBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class CNToolboxBundle
- * @package ClaviculaNox\CNToolboxBundle
+ * Class ToolboxBundle
+ * @package ClaviculaNox\ToolboxBundle
  */
-class CNToolboxBundle extends Bundle
+class ToolboxBundle extends Bundle
 {
 }

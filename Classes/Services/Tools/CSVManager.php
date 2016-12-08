@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Classes\Services\Tools;
+namespace ClaviculaNox\ToolboxBundle\Classes\Services\Tools;
 
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class CSVManager
- * @package ClaviculaNox\CNToolboxBundle\Classes\Services\Tools
+ * @package ClaviculaNox\ToolboxBundle\Classes\Services\Tools
  */
 class CSVManager
 {
@@ -38,14 +38,14 @@ class CSVManager
     public function get2DArrayFromCsv($filePath, $delim = ';')
     {
         $return = array();
-        ini_set('auto_detect_line_endings', true);
 
         if (($fileHandler = fopen($filePath, "r")) !== false) {
             $i = 0;
 
-            while (($line = fgetcsv($fileHandler, 4000, $delim)) !== false)
+            while (($line = fgetcsv($fileHandler, 4096, $delim)) !== false)
             {
-                for ($j=0; $j<count($line); $j++)
+                $count = count($line);
+                for ($j = 0; $j < $count; $j++)
                 {
                     $return[$i][$j] = $line[$j];
                 }
@@ -54,7 +54,6 @@ class CSVManager
 
             fclose($fileHandler);
         }
-        ini_set('auto_detect_line_endings', false);
 
         return $return;
     }
