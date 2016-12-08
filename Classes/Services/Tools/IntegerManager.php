@@ -31,20 +31,23 @@ class IntegerManager
      */
     public function isPrime($num)
     {
-        if($num == 1) {
+        if ($num == 1) {
             return false;
         }
 
-        if($num == 2) {
+        if ($num == 2) {
             return true;
         }
 
-        if($num % 2 == 0) {
+        if ($num % 2 == 0) {
             return false;
         }
 
-        for($i = 3; $i <= ceil(sqrt($num)); $i = $i + 2) {
-            if($num % $i == 0) {
+        $max = ceil(sqrt($num));
+
+        for ($i = 3; $i <= $max; $i = $i + 2)
+        {
+            if ($num % $i == 0) {
                 return false;
             }
         }

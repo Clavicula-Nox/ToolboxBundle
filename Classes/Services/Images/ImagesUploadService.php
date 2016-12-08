@@ -11,8 +11,6 @@
 
 namespace ClaviculaNox\ToolboxBundle\Classes\Services\Images;
 
-use ClaviculaNox\ToolboxBundle\Entity\Image;
-use ClaviculaNox\ToolboxBundle\Entity\ImageAlias;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
