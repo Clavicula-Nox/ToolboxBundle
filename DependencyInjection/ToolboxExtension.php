@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\DependencyInjection;
+namespace ClaviculaNox\ToolboxBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Class CNToolboxExtension
- * @package ClaviculaNox\CNToolboxBundle\DependencyInjection
+ * @package ClaviculaNox\ToolboxBundle\DependencyInjection
  */
 class CNToolboxExtension extends Extension
 {

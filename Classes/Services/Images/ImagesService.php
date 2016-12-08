@@ -9,33 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Classes\Services\Images;
+namespace ClaviculaNox\ToolboxBundle\Classes\Services\Images;
 
-use ClaviculaNox\CNToolboxBundle\Entity\Image;
-use ClaviculaNox\CNToolboxBundle\Entity\ImageAlias;
+use ClaviculaNox\ToolboxBundle\Entity\Image;
+use ClaviculaNox\ToolboxBundle\Entity\ImageAlias;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class ImagesService
- * @package ClaviculaNox\CNToolboxBundle\Classes\Services\Images
+ * @package ClaviculaNox\ToolboxBundle\Classes\Services\Images
  */
 class ImagesService
 {
-    private $Container;
     private $Filesystem;
     private $EntityManager;
 
     /**
      * ImagesService constructor.
-     * @param ContainerInterface $Container
      * @param Filesystem $Filesystem
      * @param EntityManager $EntityManager
      */
-    public function __construct(ContainerInterface $Container, Filesystem $Filesystem, EntityManager $EntityManager)
+    public function __construct(Filesystem $Filesystem, EntityManager $EntityManager)
     {
-        $this->Container = $Container;
         $this->Filesystem = $Filesystem;
         $this->EntityManager = $EntityManager;
     }
@@ -95,10 +92,10 @@ class ImagesService
             if ($this->Filesystem->exists($alias->getAbsolutePath())) {
                 unlink($alias->getAbsolutePath());
             }
-            //Todo : Maybe here we should delete the folder if it's empty ?
 
             $this->EntityManager->remove($alias);
-            $this->EntityManager->flush();
         }
+
+        $this->EntityManager->flush();
     }
 }

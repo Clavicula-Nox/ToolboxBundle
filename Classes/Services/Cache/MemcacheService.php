@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Classes\Services\Cache;
+namespace ClaviculaNox\ToolboxBundle\Classes\Services\Cache;
 
 /**
  * Class MemcacheService
- * @package ClaviculaNox\CNToolboxBundle\Classes\Services\Cache
+ * @package ClaviculaNox\ToolboxBundle\Classes\Services\Cache
  */
 class MemcacheService
 {

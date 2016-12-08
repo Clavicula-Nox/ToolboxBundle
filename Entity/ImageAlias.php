@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Entity;
+namespace ClaviculaNox\ToolboxBundle\Entity;
 
 #Annotations
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @package ClaviculaNox\CNToolboxBundle\Entity
+ * @package ClaviculaNox\ToolboxBundle\Entity
  *
- * @ORM\Entity(repositoryClass="ClaviculaNox\CNToolboxBundle\Entity\Repository\ImageAliasRepository")
+ * @ORM\Entity(repositoryClass="ClaviculaNox\ToolboxBundle\Entity\Repository\ImageAliasRepository")
  * @ORM\Table(name="images_alias")
  */
 class ImageAlias
@@ -75,45 +75,6 @@ class ImageAlias
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updated;
-
-    /**
-     * @return string
-     * @deprecated
-     * This is not a good idea...
-     */
-    protected function getRootDir()
-    {
-        return Image::ROOT_DIR;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAbsolutePath()
-    {
-        return $this->getAbsoluteFolderPath(). $this->getFilename();
-    }
-
-    /**
-     * @return string
-     */
-    public function getAbsoluteFolderPath()
-    {
-        if ($this->getFilepath() == "") {
-            return __DIR__ . "/../../../web/" . $this->getRootDir();
-        } else {
-            return __DIR__ . "/../../../web/" . $this->getRootDir() . $this->getFilepath();
-        }
-    }
-
-    public function getWebPath()
-    {
-        if ($this->getFilepath() == "") {
-            return "/" . $this->getRootDir() . $this->getFilename();
-        } else {
-            return "/" . $this->getRootDir(). $this->getFilepath() . $this->getFilename();
-        }
-    }
 
     /**
      * @return int
@@ -225,13 +186,5 @@ class ImageAlias
     public function setUpdated($updated)
     {
         $this->updated = $updated;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getFilename();
     }
 }

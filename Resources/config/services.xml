@@ -5,7 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="cn_toolbox.cache.file_system_cache_service" class="ClaviculaNox\CNToolboxBundle\Classes\Services\Cache\FileSystemCacheService">
+        <service id="cn_toolbox.cache.file_system_cache_service" class="ClaviculaNox\ToolboxBundle\Classes\Services\Cache\FileSystemCacheService">
             <argument type="service" id="filesystem" />
         </service>
     </services>

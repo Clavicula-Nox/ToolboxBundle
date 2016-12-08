@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Classes\Services\Tools;
+namespace ClaviculaNox\ToolboxBundle\Classes\Services\Tools;
 
-use ClaviculaNox\CNToolboxBundle\Classes\Services\Cache\FileSystemCacheService;
+use ClaviculaNox\ToolboxBundle\Classes\Services\Cache\FileSystemCacheService;
 
 /**
  * Class CommandLock
- * @package ClaviculaNox\CNToolboxBundle\Classes\Services\Tools
+ * @package ClaviculaNox\ToolboxBundle\Classes\Services\Tools
  */
 class CommandLock
 {

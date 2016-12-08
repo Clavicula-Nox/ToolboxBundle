@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Classes\Services\Tools;
+namespace ClaviculaNox\ToolboxBundle\Classes\Services\Tools;
 
 /**
  * Class StringManager
- * @package ClaviculaNox\CNToolboxBundle\Classes\Services\Tools
+ * @package ClaviculaNox\ToolboxBundle\Classes\Services\Tools
  */
 class StringManager
 {
@@ -37,7 +37,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    function washString($string)
+    public function washString($string)
     {
         $string = str_replace("&nbsp;", " ", $string);
         $string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
@@ -92,7 +92,7 @@ class StringManager
      * @param string $allowedAttributes
      * @return string
      */
-    function stripTagsAttributes($string, $allowedTags = "", $allowedAttributes = "") {
+    public function stripTagsAttributes($string, $allowedTags = "", $allowedAttributes = "") {
         $string = strip_tags($string, $allowedTags);
         if (!is_null($allowedAttributes)) {
             if (!is_array($allowedAttributes)) {
@@ -115,7 +115,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    function removeAccents($string)
+    public function removeAccents($string)
     {
         $string = str_replace(
             array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'à', 'á', 'â', 'ã', 'ä', 'å', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'È', 'É', 'Ê', 'Ë', 'è', 'é', 'ê', 'ë', 'Ç', 'ç', 'Ì', 'Í', 'Î', 'Ï', 'ì', 'í', 'î', 'ï', 'Ù', 'Ú', 'Û', 'Ü', 'ù', 'ú', 'û', 'ü', 'ÿ', 'Ñ', 'ñ'),
@@ -130,7 +130,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    function stripStringKeepInts($string)
+    public function stripStringKeepInts($string)
     {
         $string = self::cleanString($string);
         $string = str_replace(
@@ -151,7 +151,7 @@ class StringManager
      * @param array $allowedTags
      * @return string
      */
-    function cleanString($string, $keepTags = true, $allowedTags = array())
+    public function cleanString($string, $keepTags = true, $allowedTags = array())
     {
         $string = stringManager::washString($string);
         $string = strtoupper($string);
@@ -173,7 +173,7 @@ class StringManager
      * @param array $wordsList
      * @return string
      */
-    function deleteWordsFromString($string, $wordsList)
+    public function deleteWordsFromString($string, $wordsList)
     {
         $string = ' ' . $string . ' ';
         foreach ($wordsList as $value)
@@ -190,7 +190,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    function stripLineBreaks($string)
+    public function stripLineBreaks($string)
     {
         $string = str_replace("\r", '', $string);
         $string = str_replace("\n", '', $string);
@@ -203,7 +203,7 @@ class StringManager
      * Does not return a string
      * @param string $string
      */
-    function getBinaryFromString($string)
+    public function getBinaryFromString($string)
     {
         $length = strlen($string);
         $return = '';

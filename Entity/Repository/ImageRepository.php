@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Entity\Repository;
+namespace ClaviculaNox\ToolboxBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
 /**
  * Class ImageRepository
- * @package ClaviculaNox\CNToolboxBundle\Entity\Repository
+ * @package ClaviculaNox\ToolboxBundle\Entity\Repository
  */
 class ImageRepository extends EntityRepository
 {

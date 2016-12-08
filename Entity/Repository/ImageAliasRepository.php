@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\CNToolboxBundle\Entity\Repository;
+namespace ClaviculaNox\ToolboxBundle\Entity\Repository;
 
-use ClaviculaNox\CNToolboxBundle\Entity\ImageAlias;
+use ClaviculaNox\ToolboxBundle\Entity\ImageAlias;
 use Doctrine\ORM\EntityRepository;
 
 /**
  * Class ImageAliasRepository
- * @package ClaviculaNox\CNToolboxBundle\Entity\Repository
+ * @package ClaviculaNox\ToolboxBundle\Entity\Repository
  */
 class ImageAliasRepository extends EntityRepository
 {
