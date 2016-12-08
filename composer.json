@@ -1,0 +1,32 @@
+{
+    "name": "clavicula-nox/toolbox-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony CNToolboxBundle",
+    "homepage": "https://www.claviculanox.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrien Lochon",
+            "email": "adrien@claviculanox.io"
+        }
+    ],
+
+    "require": {
+        "php":                      "^5.5|~7.0",
+        "symfony/framework-bundle": "~2.7|~3.0",
+        "gedmo/doctrine-extensions": "~2.3"
+    },
+
+    "autoload": {
+        "psr-0": { "ClaviculaNox\\CNToolboxBundle\\": "" }
+    },
+
+    "extra": {
+        "branch-alias":
+        {
+            "dev-master": "0.1-dev"
+        }
+    },
+
+    "target-dir": "ClaviculaNox/CNToolboxBundle"
+}
