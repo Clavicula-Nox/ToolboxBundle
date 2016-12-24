@@ -22,9 +22,9 @@ class MemcacheService
     const TYPE_MEMCACHED = 2;
 
     private $handler;
+    private $type;
 
     private $memcachedEnabled = false;
-    private $type = 0;
 
     /**
      * MemcacheService constructor.
@@ -64,7 +64,7 @@ class MemcacheService
 
     /**
      * @param string $key
-     * @return null|array
+     * @return mixed
      */
     public function get($key)
     {
@@ -82,27 +82,9 @@ class MemcacheService
     }
 
     /**
-     * @param mixed $content
-     * @return string
-     */
-    private function convertToCache($content)
-    {
-        return json_encode($content);
-    }
-
-    /**
-     * @param string $content
-     * @return array
-     */
-    private function getDatasFromCache($content)
-    {
-        return json_decode($content, true);
-    }
-
-    /**
      * @param string $key
      * @param mixed $datas
-     * @param integer $ttl
+     * @param integer|null $ttl
      * @return array
      */
     public function set($key, $datas, $ttl = null)
@@ -126,5 +108,23 @@ class MemcacheService
         $cache = $this->getDatasFromCache($cache);
 
         return $cache['datas'];
+    }
+
+    /**
+     * @param mixed $content
+     * @return string
+     */
+    private function convertToCache($content)
+    {
+        return json_encode($content);
+    }
+
+    /**
+     * @param string $content
+     * @return array
+     */
+    private function getDatasFromCache($content)
+    {
+        return json_decode($content, true);
     }
 }

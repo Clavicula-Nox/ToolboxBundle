@@ -24,7 +24,6 @@ class FileSystemCacheService
     private $PathToCache;
 
     const DEFAULT_TTL = 600;
-    const DEFAULT_CHMOD = 0775;
 
     /**
      * @param Filesystem $Filesystem
@@ -35,13 +34,13 @@ class FileSystemCacheService
         $this->PathToCache = 'cache';
 
         if (!$this->Filesystem->exists($this->PathToCache)) {
-            $this->Filesystem->mkdir($this->PathToCache, FileSystemCacheService::DEFAULT_CHMOD);
+            $this->Filesystem->mkdir($this->PathToCache, 0775);
         }
     }
 
     /**
      * @param string $key
-     * @return null|array
+     * @return mixed
      */
     public function get($key)
     {
@@ -61,12 +60,37 @@ class FileSystemCacheService
     }
 
     /**
+     * @param string $key
+     * @param mixed $datas
+     * @param integer|null $ttl
+     * @return array
+     */
+    public function set($key, $datas, $ttl = null)
+    {
+        if (is_null($ttl)) {
+            $ttl = FileSystemCacheService::DEFAULT_TTL;
+        }
+
+        $cache = array(
+            'created' => time(),
+            'ttl' => $ttl,
+            'datas' => $datas
+        );
+
+        $cache = $this->convertToCache($cache);
+        $this->writeCacheFile($this->getCacheFilePath($key), $cache);
+        $cache = $this->getDatasFromCache($cache);
+
+        return $cache['datas'];
+    }
+
+    /**
      * Check file existence before trying to open it to prevent warnings
      *
      * @param $key
      * @return bool|string
      */
-    public function getFile($key)
+    private function getFile($key)
     {
         if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
             return file_get_contents($this->getCacheFilePath($key));
@@ -78,7 +102,7 @@ class FileSystemCacheService
     /**
      * @param $key
      */
-    public function deleteCacheFile($key)
+    private function deleteCacheFile($key)
     {
         if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
             $this->Filesystem->remove($this->getCacheFilePath($key));
@@ -101,9 +125,9 @@ class FileSystemCacheService
     private function writeCacheFile($path, $cache)
     {
         if ($this->Filesystem->exists($path)) {
-            //Just in case
             $this->Filesystem->remove($path);
         }
+
         $this->Filesystem->dumpFile($path, $cache);
     }
 
@@ -123,30 +147,5 @@ class FileSystemCacheService
     private function getDatasFromCache($content)
     {
         return json_decode($content, true);
-    }
-
-    /**
-     * @param string $key
-     * @param mixed $datas
-     * @param integer $ttl
-     * @return array
-     */
-    public function set($key, $datas, $ttl = null)
-    {
-        if (is_null($ttl)) {
-            $ttl = FileSystemCacheService::DEFAULT_TTL;
-        }
-
-        $cache = array(
-            'created' => time(),
-            'ttl' => $ttl,
-            'datas' => $datas
-        );
-
-        $cache = $this->convertToCache($cache);
-        $this->writeCacheFile($this->getCacheFilePath($key), $cache);
-        $cache = $this->getDatasFromCache($cache);
-
-        return $cache['datas'];
     }
 }

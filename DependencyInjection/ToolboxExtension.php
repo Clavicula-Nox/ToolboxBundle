@@ -17,10 +17,10 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class CNToolboxExtension
+ * Class ToolboxExtension
  * @package ClaviculaNox\ToolboxBundle\DependencyInjection
  */
-class CNToolboxExtension extends Extension
+class ToolboxExtension extends Extension
 {
     /**
      * {@inheritdoc}
