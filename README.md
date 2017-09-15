@@ -6,7 +6,7 @@ ToolboxBundle
 
 **Requirements**
 
-  * Symfony 2.7+ or 3.x applications
+  * Symfony 3.x applications
   * Doctrine ORM entities
 
 **Reporting an issue or a feature request**

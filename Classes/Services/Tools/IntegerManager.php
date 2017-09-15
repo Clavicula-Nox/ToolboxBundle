@@ -18,14 +18,6 @@ namespace ClaviculaNox\ToolboxBundle\Classes\Services\Tools;
 class IntegerManager
 {
     /**
-     * IntegerManager constructor.
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * @param integer $num
      * @return bool
      */

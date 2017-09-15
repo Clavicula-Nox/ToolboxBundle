@@ -12,8 +12,6 @@
 namespace ClaviculaNox\ToolboxBundle\Classes\Services\Tools;
 
 use ClaviculaNox\ToolboxBundle\Classes\Services\Cache\FileSystemCacheService;
-use ClaviculaNox\ToolboxBundle\Classes\Services\Cache\MemcacheService;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class CacheManager
@@ -22,28 +20,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CacheManager
 {
     protected $FileSystemCacheService;
-    protected $MemcacheService;
-    protected $Container;
-
     protected $Handler;
 
     /**
      * CacheManager constructor.
      * @param FileSystemCacheService $FileSystemCacheService
-     * @param MemcacheService $MemcacheService
-     * @param ContainerInterface $Container
      */
-    public function __construct(FileSystemCacheService $FileSystemCacheService, MemcacheService $MemcacheService, ContainerInterface $Container)
+    public function __construct(FileSystemCacheService $FileSystemCacheService)
     {
         $this->FileSystemCacheService = $FileSystemCacheService;
-        $this->MemcacheService = $MemcacheService;
-        $this->Container = $Container;
-
-        if ($this->MemcacheService->isInitialized()) {
-            $this->Handler = $this->MemcacheService;
-        } else {
-            $this->Handler = $this->FileSystemCacheService;
-        }
+        $this->Handler = $FileSystemCacheService;
     }
 
     /**

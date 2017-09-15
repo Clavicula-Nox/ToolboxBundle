@@ -85,19 +85,19 @@ class CSVManager
     }
 
     /**
-     * @param array $csvDatas
+     * @param array $datas
      * @param string $delim
      * @param string $enclosure
      * @return string
      */
-    public function generateCsv($csvDatas, $delim = ';', $enclosure = '"')
+    public function generateCsv($datas, $delim = ';', $enclosure = '"')
     {
         if (is_null($enclosure))
             $enclosure = chr(0);
 
         $handle = fopen('php://memory', 'r+');
 
-        foreach ($csvDatas as $data)
+        foreach ($datas as $data)
         {
             foreach ($data as $key => $value)
             {

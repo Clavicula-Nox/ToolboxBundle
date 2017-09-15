@@ -26,14 +26,6 @@ class StringManager
         ];
 
     /**
-     * StringManager constructor.
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * @param string $string
      * @return string
      */
@@ -266,7 +258,7 @@ class StringManager
     public function generateRandomString($length)
     {
         $return = "";
-        $charsListLength = strlen(self::$charsList) - 1;
+        $charsListLength = count(self::$charsList) - 1;
 
         for ($i = 0; $i < $length; $i++) {
             $return .= self::$charsList[mt_rand(0, $charsListLength)];

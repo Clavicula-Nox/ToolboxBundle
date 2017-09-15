@@ -1,5 +1,21 @@
 services:
-    cn_toolbox.cache.file_system_cache_service:
+    cn_toolbox.cache.filesystem:
         class: ClaviculaNox\ToolboxBundle\Classes\Services\Cache\FileSystemCacheService
         arguments:
             - "@filesystem"
+
+    cn_toolbox.tools.cache_manager:
+        class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\CacheManager
+        arguments:
+            - "@cn_toolbox.cache.filesystem"
+
+    cn_toolbox.tools.csv_manager:
+        class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\CSVManager
+        arguments:
+            - "@filesystem"
+
+    cn_toolbox.tools.integer_manager:
+        class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\IntegerManager
+
+    cn_toolbox.tools.string_manager:
+        class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\StringManager
