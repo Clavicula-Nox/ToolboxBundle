@@ -13,12 +13,21 @@
     ],
 
     "require": {
-        "php":                      ">=5.5.0",
-        "symfony/framework-bundle": "~2.7|~3.0",
-        "gedmo/doctrine-extensions": "~2.3"
+        "php":                      "^7.0",
+        "symfony/framework-bundle": "^3.0"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
     },
 
     "autoload": {
         "psr-4": { "ClaviculaNox\\ToolboxBundle\\": "" }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "ClaviculaNox\\ToolboxBundle\\Tests\\": "Tests/"
+        }
     }
 }

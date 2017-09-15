@@ -1,0 +1,5 @@
+services:
+    cn_toolbox.cache.file_system_cache_service:
+        class: ClaviculaNox\ToolboxBundle\Classes\Services\Cache\FileSystemCacheService
+        arguments:
+            - "@filesystem"

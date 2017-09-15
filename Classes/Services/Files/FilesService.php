@@ -35,4 +35,10 @@ class FilesService
         $this->Filesystem = $Filesystem;
         $this->EntityManager = $EntityManager;
     }
+
+    //This function scans a dir without . and .. and stuff
+    public function scanDir()
+    {
+
+    }
 }

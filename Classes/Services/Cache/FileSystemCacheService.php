@@ -102,7 +102,7 @@ class FileSystemCacheService
     /**
      * @param $key
      */
-    private function deleteCacheFile($key)
+    public function deleteCacheFile($key)
     {
         if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
             $this->Filesystem->remove($this->getCacheFilePath($key));
