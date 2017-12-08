@@ -1,0 +1,10 @@
+parameters:
+    database_path: '%kernel.root_dir%/../../build/test.db'
+
+framework:
+    trusted_hosts: ~
+    secret: "test"
+    test: ~
+
+toolbox:
+    cache_path: "%kernel.root_dir%/../../build/cache/toolboxbundle"

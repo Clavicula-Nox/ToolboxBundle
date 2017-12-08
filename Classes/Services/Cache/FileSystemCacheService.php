@@ -20,7 +20,6 @@ use Symfony\Component\Filesystem\Filesystem;
 class FileSystemCacheService
 {
     private $Filesystem;
-
     private $PathToCache;
 
     const DEFAULT_TTL = 600;

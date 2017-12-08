@@ -3,11 +3,7 @@ services:
         class: ClaviculaNox\ToolboxBundle\Classes\Services\Cache\FileSystemCacheService
         arguments:
             - "@filesystem"
-
-    cn_toolbox.tools.cache_manager:
-        class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\CacheManager
-        arguments:
-            - "@cn_toolbox.cache.filesystem"
+            - ""
 
     cn_toolbox.tools.csv_manager:
         class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\CSVManager
