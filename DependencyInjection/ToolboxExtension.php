@@ -31,7 +31,7 @@ class ToolboxExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         foreach ($config as $key => $value) {
-            $container->setParameter('cn_toolbox.'.$key, $value);
+            $container->setParameter('toolbox.'.$key, $value);
         }
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/'));

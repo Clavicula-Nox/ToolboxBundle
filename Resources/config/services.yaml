@@ -2,8 +2,10 @@ services:
     cn_toolbox.cache.filesystem:
         class: ClaviculaNox\ToolboxBundle\Classes\Services\Cache\FileSystemCacheService
         arguments:
+            - "%toolbox.fs_system_cache_path%"
+            - "%toolbox.fs_system_cache_path_chmod%"
+            - "%toolbox.fs_system_cache_path_default_ttl%"
             - "@filesystem"
-            - ""
 
     cn_toolbox.tools.csv_manager:
         class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\CSVManager

@@ -13,6 +13,7 @@ namespace ClaviculaNox\ToolboxBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 
 /**
  * Class Configuration.
@@ -30,19 +31,24 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-                ->scalarNode('cache_path')
+                ->scalarNode('fs_system_cache_path')
+                    ->isRequired()
                     ->validate()
                         ->ifString()
                         ->then(function($value) {
-                            if (!is_dir($value)) {
-
+                            if ("" == $value) {
+                                throw new InvalidConfigurationException('Toolbox cache path value is empty.');
                             }
-                            var_dump(is_dir($value));
-                            var_dump($value);
-                            die();
+
                             return $value;
                         })
                     ->end()
+                ->end()
+                ->scalarNode('fs_system_cache_path_chmod')
+                ->end()
+                ->integerNode('fs_system_cache_path_default_ttl')
+                    ->min(0)
+                ->end()
                 ->end()
             ->end();
 

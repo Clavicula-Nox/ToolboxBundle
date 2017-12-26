@@ -19,6 +19,12 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class FileSystemCacheServiceTest extends WebTestCase
 {
+    /* @var string*/
+    private $key = 'cacheTestKey';
+
+    /* @var array*/
+    private $cache = ['keyOne' => 'valOne', 'keyTwo' => ['val2']];
+
     /**
      * @return KernelInterface
      */
@@ -27,5 +33,32 @@ class FileSystemCacheServiceTest extends WebTestCase
         return $this->bootKernel($options);
     }
 
+    public function testSet(): void
+    {
+        $this
+            ->getKernel()
+            ->getContainer()
+            ->get("cn_toolbox.cache.filesystem")->set($this->key, $this->cache);
 
+        $cache = $this
+            ->getKernel()
+            ->getContainer()
+            ->get("cn_toolbox.cache.filesystem")->get($this->key);
+
+        $this->assertTrue($this->cache === $cache);
+
+        $this
+            ->getKernel()
+            ->getContainer()
+            ->get("cn_toolbox.cache.filesystem")->set($this->key, $this->cache, 1);
+
+        sleep(2);
+
+        $cache = $this
+            ->getKernel()
+            ->getContainer()
+            ->get("cn_toolbox.cache.filesystem")->get($this->key);
+
+        $this->assertTrue(is_null($cache));
+    }
 }
