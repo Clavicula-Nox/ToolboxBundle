@@ -13,23 +13,28 @@ namespace ClaviculaNox\ToolboxBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class CNToolboxExtension
+ * Class ToolboxExtension
  * @package ClaviculaNox\ToolboxBundle\DependencyInjection
  */
-class CNToolboxExtension extends Extension
+class ToolboxExtension extends Extension
 {
     /**
      * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $locator = new FileLocator(__DIR__ . '/../Resources/config/');
-        $loader  = new XmlFileLoader($container, $locator);
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
 
-        $loader->load('services.xml');
+        foreach ($config as $key => $value) {
+            $container->setParameter('toolbox.'.$key, $value);
+        }
+
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/'));
+        $loader->load('services.yaml');
     }
 }

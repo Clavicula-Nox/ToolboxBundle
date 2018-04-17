@@ -12,45 +12,60 @@
 namespace ClaviculaNox\ToolboxBundle\Classes\Services\Cache;
 
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 /**
  * Class FileSystemCacheService
- * @package ClaviculaNox\ToolboxBundle\Classes\Services\Cache
  */
 class FileSystemCacheService
 {
-    private $Filesystem;
-
+    /* @var string */
     private $PathToCache;
 
-    const DEFAULT_TTL = 600;
-    const DEFAULT_CHMOD = 0775;
+    /* @var string */
+    private $CacheChmod;
+
+    /* @var int */
+    private $DefaultTTL;
+
+    /* @var Filesystem */
+    private $Filesystem;
 
     /**
+     * FileSystemCacheService constructor.
+     * @param string $cachePath
+     * @param string $cacheChmod
+     * @param int $cacheDefaultTTL
      * @param Filesystem $Filesystem
      */
-    public function __construct(Filesystem $Filesystem)
+    public function __construct(string $cachePath, string $cacheChmod, int $cacheDefaultTTL, Filesystem $Filesystem)
     {
+        $this->PathToCache = $cachePath;
+        $this->CacheChmod = $cacheChmod;
+        $this->DefaultTTL = $cacheDefaultTTL;
         $this->Filesystem = $Filesystem;
-        $this->PathToCache = 'cache';
 
         if (!$this->Filesystem->exists($this->PathToCache)) {
-            $this->Filesystem->mkdir($this->PathToCache, FileSystemCacheService::DEFAULT_CHMOD);
+            $this->Filesystem->mkdir($this->PathToCache, $this->CacheChmod);
+            if (!is_writable($this->PathToCache)) {
+                throw new AccessDeniedException($this->PathToCache);
+            }
         }
     }
 
     /**
      * @param string $key
-     * @return null|array
+     * @return mixed
      */
-    public function get($key)
+    public function get(string $key)
     {
         $fileContent = $this->getFile($key);
 
-        if ($fileContent) {
+        if ('' != $fileContent) {
             $cache = $this->getDatasFromCache($fileContent);
             if (is_null($cache) || !$cache || $cache['created'] + $cache['ttl'] < time()) {
                 $this->deleteCacheFile($key);
+
                 return null;
             }
 
@@ -61,80 +76,14 @@ class FileSystemCacheService
     }
 
     /**
-     * Check file existence before trying to open it to prevent warnings
-     *
-     * @param $key
-     * @return bool|string
-     */
-    public function getFile($key)
-    {
-        if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
-            return file_get_contents($this->getCacheFilePath($key));
-        }
-
-        return false;
-    }
-
-    /**
-     * @param $key
-     */
-    public function deleteCacheFile($key)
-    {
-        if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
-            $this->Filesystem->remove($this->getCacheFilePath($key));
-        }
-    }
-
-    /**
-     * @param string $key
-     * @return string
-     */
-    private function getCacheFilePath($key)
-    {
-        return $this->PathToCache . '/' . $key . '.json';
-    }
-
-    /**
-     * @param string $path
-     * @param string $cache
-     */
-    private function writeCacheFile($path, $cache)
-    {
-        if ($this->Filesystem->exists($path)) {
-            //Just in case
-            $this->Filesystem->remove($path);
-        }
-        $this->Filesystem->dumpFile($path, $cache);
-    }
-
-    /**
-     * @param mixed $content
-     * @return string
-     */
-    private function convertToCache($content)
-    {
-        return json_encode($content);
-    }
-
-    /**
-     * @param string $content
-     * @return array
-     */
-    private function getDatasFromCache($content)
-    {
-        return json_decode($content, true);
-    }
-
-    /**
      * @param string $key
      * @param mixed $datas
      * @param integer $ttl
-     * @return array
      */
-    public function set($key, $datas, $ttl = null)
+    public function set(string $key, $datas, int $ttl = -1): void
     {
-        if (is_null($ttl)) {
-            $ttl = FileSystemCacheService::DEFAULT_TTL;
+        if (-1 === $ttl) {
+            $ttl = $this->DefaultTTL;
         }
 
         $cache = array(
@@ -145,8 +94,70 @@ class FileSystemCacheService
 
         $cache = $this->convertToCache($cache);
         $this->writeCacheFile($this->getCacheFilePath($key), $cache);
-        $cache = $this->getDatasFromCache($cache);
+    }
 
-        return $cache['datas'];
+    /**
+     * @param string $key
+     * @return string
+     */
+    private function getFile(string $key): string
+    {
+        if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
+            $return = file_get_contents($this->getCacheFilePath($key));
+
+            return !$return ? '' : $return;
+        }
+
+        return '';
+    }
+
+    /**
+     * @param string $key
+     */
+    private function deleteCacheFile(string $key): void
+    {
+        if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
+            $this->Filesystem->remove($this->getCacheFilePath($key));
+        }
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    private function getCacheFilePath(string $key): string
+    {
+        return $this->PathToCache . '/' . $key . '.json';
+    }
+
+    /**
+     * @param string $path
+     * @param string $cache
+     */
+    private function writeCacheFile(string $path, string $cache): void
+    {
+        if ($this->Filesystem->exists($path)) {
+            $this->Filesystem->remove($path);
+        }
+
+        $this->Filesystem->dumpFile($path, $cache);
+    }
+
+    /**
+     * @param array $content
+     * @return string
+     */
+    private function convertToCache(array $content): string
+    {
+        return json_encode($content);
+    }
+
+    /**
+     * @param string $content
+     * @return array
+     */
+    private function getDatasFromCache(string $content): array
+    {
+        return json_decode($content, true);
     }
 }

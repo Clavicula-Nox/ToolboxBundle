@@ -26,18 +26,10 @@ class StringManager
         ];
 
     /**
-     * StringManager constructor.
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * @param string $string
      * @return string
      */
-    public function washString($string)
+    public function washString(string $string): string
     {
         $string = str_replace("&nbsp;", " ", $string);
         $string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
@@ -54,8 +46,6 @@ class StringManager
         $string = str_replace(chr(197) . chr(34), "oe", $string);
         $string = str_replace(chr(226) . chr(128) . chr(147), "-", $string);
         $string = str_replace("Œ", "OE", $string);
-        $string = str_replace("—", "-", $string);
-        $string = str_replace("–", "-", $string);
         $string = str_replace("–", "-", $string);
         $string = str_replace("•", "-", $string);
         $string = str_replace("ň", "n", $string);
@@ -68,7 +58,7 @@ class StringManager
         $string = str_replace("›", ">", $string);
         $string = str_replace("‹", "<", $string);
         $string = str_replace("€", "E", $string);
-        $string = str_replace(chr(226) . chr(130) . chr(172), '€', $string); //just in case the € is with a bad encoding
+        $string = str_replace(chr(226) . chr(130) . chr(172), '€', $string);
         $string = str_replace(chr(195) . chr(169), "é", $string);
         $string = str_replace(chr(195) . chr(34), "û", $string);
         $string = str_replace(chr(195) . chr(170), "ê", $string);
@@ -82,31 +72,6 @@ class StringManager
         $string = str_replace(chr(195) . chr(167), "ç", $string);
 
         $string = trim($string);
-
-        return (string) $string;
-    }
-
-    /**
-     * @param string $string
-     * @param string $allowedTags
-     * @param string $allowedAttributes
-     * @return string
-     */
-    public function stripTagsAttributes($string, $allowedTags = "", $allowedAttributes = "") {
-        $string = strip_tags($string, $allowedTags);
-        if (!is_null($allowedAttributes)) {
-            if (!is_array($allowedAttributes)) {
-                $allowedAttributes = explode(",", $allowedAttributes);
-            }
-            if (is_array($allowedAttributes)) {
-                $allowedAttributes = implode(")(?<!", $allowedAttributes);
-            }
-            if (strlen($allowedAttributes) > 0) {
-                $allowedAttributes = "(?<!" . $allowedAttributes . ")";
-            }
-
-            $string = preg_replace_callback("/<[^>]*>/i", create_function('$matches', 'return preg_replace("/ [^ =]*' . $allowedAttributes . '=(\"[^\"]*\"|\'[^\']*\')/i", "", $matches[0]);'), $string);
-        }
 
         return (string) $string;
     }
@@ -130,14 +95,40 @@ class StringManager
      * @param string $string
      * @return string
      */
-    public function stripStringKeepInts($string)
+    public function removeCharsKeepInts($string)
     {
         $string = self::cleanString($string);
+        $string = strtolower($string);
         $string = str_replace(
-            array(
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-            ),
+            [
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+            ],
             '',
+            $string
+        );
+
+        $string = str_replace(" ", "", $string);
+
+        return (string) $string;
+    }
+
+    /**
+     * @param string $string
+     * @param bool   $keepTags
+     * @param array  $allowedTags
+     * @return string
+     */
+    public function cleanString($string)
+    {
+        $string = stringManager::washString($string);
+        $string = stringManager::removeAccents($string);
+        $string = str_replace(
+            [
+                ",", ";", ".", ":", "°", "-", "_", "'", '"', "&", " ", "/", "\\", "@", "$", "%", "£", "¤", "µ", "*", "!",
+                "§", "μ", "(", ")", "{", "}", "[", "]", "^", "¨", "?", "§"
+            ],
+            "",
             $string
         );
         $string = trim($string);
@@ -146,39 +137,17 @@ class StringManager
     }
 
     /**
-     * @param string $string
-     * @param bool $keepTags
-     * @param array $allowedTags
+     * @param string    $string
+     * @param array     $wordsList
      * @return string
      */
-    public function cleanString($string, $keepTags = true, $allowedTags = array())
-    {
-        $string = stringManager::washString($string);
-        $string = strtoupper($string);
-        $toReplace = array(",", ";", ".", ":", "°", "-", "_", "'", '"', "&", " ", "/", "\\", "@", "$", "%", "£", "¤", "µ", "*", "!", "§");
-        $string = str_replace($toReplace, " ", $string);
-
-        $string = stringManager::removeAccents($string);
-        $string = strtolower($string);
-        if (!$keepTags && is_array($allowedTags)) {
-            $string = strip_tags($string, $allowedTags);
-            $string = trim($string);
-        }
-
-        return (string) $string;
-    }
-
-    /**
-     * @param string $string
-     * @param array $wordsList
-     * @return string
-     */
-    public function deleteWordsFromString($string, $wordsList)
+    public function deleteWordsFromString(string $string, array $wordsList): string
     {
         $string = ' ' . $string . ' ';
         foreach ($wordsList as $value)
         {
             $string = preg_replace("/([[:space:][:punct:]]+)" . mb_strtolower($value) . "([[:space:][:punct:]]+)/i", '\1\2', $string);
+            $string = str_replace("  ", " ", $string);
         }
 
         $string = trim($string);
@@ -190,7 +159,7 @@ class StringManager
      * @param string $string
      * @return string
      */
-    public function stripLineBreaks($string)
+    public function stripLineBreaks(string $string): string
     {
         $string = str_replace("\r", '', $string);
         $string = str_replace("\n", '', $string);
@@ -200,27 +169,11 @@ class StringManager
     }
 
     /**
-     * Does not return a string
-     * @param string $string
-     */
-    public function getBinaryFromString($string)
-    {
-        $length = strlen($string);
-        $return = '';
-
-        for ($i = 0; $i < $length; $i++) {
-            $return .= str_pad(decbin(ord($string[$i])), 8, '0', STR_PAD_LEFT);
-        }
-
-        echo $return;
-    }
-
-    /**
-     * @param string $string
-     * @param integer $length
+     * @param string    $string
+     * @param int       $length
      * @return string
      */
-    public function cleanSubStr($string, $length = 200)
+    public function niceSubStr(string $string, int $length = 200): string
     {
         if (strlen($string) > $length) {
             $tmp = substr($string, 0, $length);
@@ -241,10 +194,10 @@ class StringManager
      * @param string $string
      * @return string
      */
-    public function stringToLabel($string)
+    public function stringToLabel(string $string): string
     {
         $string = stringManager::washString($string);
-        $toReplace = array(",", ";", ".", ":", "°", "-", "_", "'", '"', "&", " ", "/", "\\", "@", "$", "%", "£", "¤", "µ", "*", "!", "§");
+        $toReplace = [",", ";", ".", ":", "°", "-", "_", "'", '"', "&", " ", "/", "\\", "@", "$", "%", "£", "¤", "µ", "*", "!", "§"];
         $string = str_replace($toReplace, " ", $string);
         $string = stringManager::removeAccents($string);
         $stringArray = explode(' ', $string);
@@ -260,19 +213,18 @@ class StringManager
     }
 
     /**
-     * @param integer $length
+     * @param int $length
      * @return string
      */
-    public function generateRandomString($length)
+    public function generateRandomString(int $length): string
     {
         $return = "";
-        $charsListLength = strlen(self::$charsList) - 1;
+        $charsListLength = count(self::$charsList) - 1;
 
         for ($i = 0; $i < $length; $i++) {
             $return .= self::$charsList[mt_rand(0, $charsListLength)];
         }
 
         return $return;
-
     }
 }

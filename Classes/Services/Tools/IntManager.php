@@ -12,34 +12,21 @@
 namespace ClaviculaNox\ToolboxBundle\Classes\Services\Tools;
 
 /**
- * Class IntegerManager
- * @package ClaviculaNox\ToolboxBundle\Classes\Services\Tools
+ * Class IntManager
  */
-class IntegerManager
+class IntManager
 {
     /**
-     * IntegerManager constructor.
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
-     * @param integer $num
+     * @param int $num
      * @return bool
      */
-    public function isPrime($num)
+    public function isPrime(int $num): bool
     {
-        if ($num == 1) {
-            return false;
-        }
-
         if ($num == 2) {
             return true;
         }
 
-        if ($num % 2 == 0) {
+        if ($num == 1 || $num % 2 == 0) {
             return false;
         }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="./Tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="ToolboxBundle for the Symfony Framework">
+            <directory suffix="Test.php">./Tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <server name="KERNEL_DIR" value="./Tests/App/" />
+    </php>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./Services</directory>
+            <directory suffix=".php">./Tools</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-clover" target="coverage.xml"/>
+    </logging>
+</phpunit>

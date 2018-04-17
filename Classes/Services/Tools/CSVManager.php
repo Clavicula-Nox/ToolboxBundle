@@ -15,10 +15,10 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class CSVManager
- * @package ClaviculaNox\ToolboxBundle\Classes\Services\Tools
  */
 class CSVManager
 {
+    /* @var Filesystem */
     private $FileSystem = null;
 
     /**
@@ -35,9 +35,9 @@ class CSVManager
      * @param string $delim
      * @return array
      */
-    public function get2DArrayFromCsv($filePath, $delim = ';')
+    public function getCSV(string $filePath, string $delim = ';'): array
     {
-        $return = array();
+        $return = [];
 
         if (($fileHandler = fopen($filePath, "r")) !== false) {
             $i = 0;
@@ -63,7 +63,7 @@ class CSVManager
      * @param string $filePath
      * @param string $fileName
      */
-    public function writeCsv($fileContent, $filePath = '', $fileName = '')
+    private function writeFile(string $fileContent, string $filePath = '', string $fileName = ''): void
     {
         if (mb_detect_encoding($fileContent) != 'UTF-8') {
             $fileContent = utf8_encode($fileContent);
@@ -79,25 +79,30 @@ class CSVManager
      * @param string $delim
      * @param string $enclosure
      */
-    public function generateCsvToFile($csvDatas, $filePath = '', $fileName = '', $delim = ';', $enclosure = '"')
+    public function writeCSV(
+        array $csvDatas,
+        string $filePath = '',
+        string $fileName = '',
+        string $delim = ';',
+        string $enclosure = '"'): void
     {
-        $this->writeCsv($this->generateCsv($csvDatas, $delim, $enclosure), $filePath, $fileName);
+        $this->writeFile($this->generateCSV($csvDatas, $delim, $enclosure), $filePath, $fileName);
     }
 
     /**
-     * @param array $csvDatas
+     * @param array $datas
      * @param string $delim
      * @param string $enclosure
      * @return string
      */
-    public function generateCsv($csvDatas, $delim = ';', $enclosure = '"')
+    public function generateCSV(array $datas, string $delim = ';', string $enclosure = '"'): string
     {
         if (is_null($enclosure))
             $enclosure = chr(0);
 
         $handle = fopen('php://memory', 'r+');
 
-        foreach ($csvDatas as $data)
+        foreach ($datas as $data)
         {
             foreach ($data as $key => $value)
             {

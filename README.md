@@ -1,12 +1,16 @@
 ToolboxBundle
 ===================
 
-[![Symfony](https://img.shields.io/badge/Symfony-%202.7%20and%203.x-green.svg "Supports Symfony 2.7 and 3.x")](https://symfony.com/)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/52227642-f384-4a42-8669-f207bae22e6d/mini.png)](https://insight.sensiolabs.com/projects/c607d9d8-329b-461a-82f8-8ad30be60be8)
+[![Latest Stable Version](https://poser.pugx.org/clavicula-nox/toolbox-bundle/v/stable)](https://packagist.org/packages/clavicula-nox/toolbox-bundle)
+[![License](https://poser.pugx.org/clavicula-nox/toolbox-bundle/license)](https://packagist.org/packages/clavicula-nox/toolbox-bundle)
+[![Total Downloads](https://poser.pugx.org/clavicula-nox/toolbox-bundle/downloads)](https://packagist.org/packages/clavicula-nox/toolbox-bundle)
+[![Symfony](https://img.shields.io/badge/Symfony-%203.4%20&%204.x-green.svg "Supports Symfony 3.4 & 4.x")](https://symfony.com/)
 
 **Requirements**
 
-  * Symfony 2.7+ or 3.x applications
-  * Doctrine ORM entities
+  * php 7.1+
+  * Symfony 3.4 and 4.x applications
 
 **Reporting an issue or a feature request**
 

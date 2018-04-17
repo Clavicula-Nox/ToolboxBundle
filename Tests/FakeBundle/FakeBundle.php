@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace ClaviculaNox\ToolboxBundle\Entity\Repository;
+namespace ClaviculaNox\ToolboxBundle\Tests\FakeBundle;
 
-use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ImageRepository
- * @package ClaviculaNox\ToolboxBundle\Entity\Repository
+ * Class FakeBundle
+ * @package ClaviculaNox\ToolboxBundle\Tests\FakeBundle
  */
-class ImageRepository extends EntityRepository
+class FakeBundle extends Bundle
 {
-
 }

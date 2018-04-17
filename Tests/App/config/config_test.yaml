@@ -1,0 +1,12 @@
+parameters:
+    database_path: '%kernel.root_dir%/../../build/test.db'
+
+framework:
+    trusted_hosts: ~
+    secret: "test"
+    test: ~
+
+toolbox:
+    fs_system_cache_path: "%kernel.root_dir%/../../build/cache/toolboxbundle"
+    fs_system_cache_path_chmod: "06644"
+    fs_system_cache_path_default_ttl: 3600
