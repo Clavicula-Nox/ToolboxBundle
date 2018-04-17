@@ -35,8 +35,8 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->validate()
                         ->ifString()
-                        ->then(function($value) {
-                            if ("" == $value) {
+                        ->then(function ($value) {
+                            if ('' == $value) {
                                 throw new InvalidConfigurationException('Toolbox cache path value is empty.');
                             }
 

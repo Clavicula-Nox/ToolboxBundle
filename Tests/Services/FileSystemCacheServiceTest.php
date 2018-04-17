@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class FileSystemCacheServiceTest
+ * Class FileSystemCacheServiceTest.
  */
 class FileSystemCacheServiceTest extends WebTestCase
 {
@@ -38,26 +38,26 @@ class FileSystemCacheServiceTest extends WebTestCase
         $this
             ->getKernel()
             ->getContainer()
-            ->get("cn_toolbox.cache.filesystem")->set($this->key, $this->cache);
+            ->get('cn_toolbox.cache.filesystem')->set($this->key, $this->cache);
 
         $cache = $this
             ->getKernel()
             ->getContainer()
-            ->get("cn_toolbox.cache.filesystem")->get($this->key);
+            ->get('cn_toolbox.cache.filesystem')->get($this->key);
 
         $this->assertTrue($this->cache === $cache);
 
         $this
             ->getKernel()
             ->getContainer()
-            ->get("cn_toolbox.cache.filesystem")->set($this->key, $this->cache, 1);
+            ->get('cn_toolbox.cache.filesystem')->set($this->key, $this->cache, 1);
 
         sleep(2);
 
         $cache = $this
             ->getKernel()
             ->getContainer()
-            ->get("cn_toolbox.cache.filesystem")->get($this->key);
+            ->get('cn_toolbox.cache.filesystem')->get($this->key);
 
         $this->assertTrue(is_null($cache));
     }
@@ -67,12 +67,12 @@ class FileSystemCacheServiceTest extends WebTestCase
         $this
             ->getKernel()
             ->getContainer()
-            ->get("cn_toolbox.cache.filesystem")->set($this->key, $this->cache);
+            ->get('cn_toolbox.cache.filesystem')->set($this->key, $this->cache);
 
         $this->assertTrue(
             $this->cache === $this->getKernel()
                 ->getContainer()
-                ->get("cn_toolbox.cache.filesystem")->get($this->key)
+                ->get('cn_toolbox.cache.filesystem')->get($this->key)
         );
     }
 }

@@ -14,8 +14,7 @@ namespace ClaviculaNox\ToolboxBundle\Tests\FakeBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class FakeBundle
- * @package ClaviculaNox\ToolboxBundle\Tests\FakeBundle
+ * Class FakeBundle.
  */
 class FakeBundle extends Bundle
 {

@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 /**
- * Class AppKernel
+ * Class AppKernel.
  */
 class AppKernel extends Kernel
 {
@@ -33,6 +33,7 @@ class AppKernel extends Kernel
 
     /**
      * @param LoaderInterface $loader
+     *
      * @throws Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader)

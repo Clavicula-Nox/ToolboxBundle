@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class IntManagerTest
+ * Class IntManagerTest.
  */
 class IntManagerTest extends WebTestCase
 {
@@ -35,24 +35,22 @@ class IntManagerTest extends WebTestCase
 
     public function testIsPrime(): void
     {
-        foreach ($this->primes as $prime)
-        {
+        foreach ($this->primes as $prime) {
             $isPrime = $csv = $this
                 ->getKernel()
                 ->getContainer()
-                ->get("cn_toolbox.tools.int_manager")->isPrime($prime);
+                ->get('cn_toolbox.tools.int_manager')->isPrime($prime);
 
-            $this->assertTrue($isPrime === true);
+            $this->assertTrue(true === $isPrime);
         }
 
-        foreach ($this->notPrimes as $notPrime)
-        {
+        foreach ($this->notPrimes as $notPrime) {
             $isPrime = $csv = $this
                 ->getKernel()
                 ->getContainer()
-                ->get("cn_toolbox.tools.int_manager")->isPrime($notPrime);
+                ->get('cn_toolbox.tools.int_manager')->isPrime($notPrime);
 
-            $this->assertTrue($isPrime === false);
+            $this->assertTrue(false === $isPrime);
         }
     }
 }
