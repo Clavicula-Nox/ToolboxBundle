@@ -61,4 +61,18 @@ class FileSystemCacheServiceTest extends WebTestCase
 
         $this->assertTrue(is_null($cache));
     }
+
+    public function testGet(): void
+    {
+        $this
+            ->getKernel()
+            ->getContainer()
+            ->get("cn_toolbox.cache.filesystem")->set($this->key, $this->cache);
+
+        $this->assertTrue(
+            $this->cache === $this->getKernel()
+                ->getContainer()
+                ->get("cn_toolbox.cache.filesystem")->get($this->key)
+        );
+    }
 }

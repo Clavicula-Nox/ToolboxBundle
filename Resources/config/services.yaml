@@ -14,8 +14,8 @@ services:
         arguments:
             - "@filesystem"
 
-    cn_toolbox.tools.integer_manager:
-        class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\IntegerManager
+    cn_toolbox.tools.int_manager:
+        class: ClaviculaNox\ToolboxBundle\Classes\Services\Tools\IntManager
         public: true
 
     cn_toolbox.tools.string_manager:

@@ -22,17 +22,18 @@ class AppKernel extends Kernel
      */
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new ClaviculaNox\ToolboxBundle\ToolboxBundle(),
             new ClaviculaNox\ToolboxBundle\Tests\FakeBundle\FakeBundle(),
-        );
+        ];
 
         return $bundles;
     }
 
     /**
      * @param LoaderInterface $loader
+     * @throws Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {

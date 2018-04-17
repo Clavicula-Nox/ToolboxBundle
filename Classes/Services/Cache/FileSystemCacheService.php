@@ -38,7 +38,7 @@ class FileSystemCacheService
      * @param int $cacheDefaultTTL
      * @param Filesystem $Filesystem
      */
-    public function __construct($cachePath, $cacheChmod, $cacheDefaultTTL, Filesystem $Filesystem)
+    public function __construct(string $cachePath, string $cacheChmod, int $cacheDefaultTTL, Filesystem $Filesystem)
     {
         $this->PathToCache = $cachePath;
         $this->CacheChmod = $cacheChmod;
@@ -57,7 +57,7 @@ class FileSystemCacheService
      * @param string $key
      * @return mixed
      */
-    public function get($key)
+    public function get(string $key)
     {
         $fileContent = $this->getFile($key);
 
@@ -78,17 +78,17 @@ class FileSystemCacheService
     /**
      * @param string $key
      * @param mixed $datas
-     * @param integer|null $ttl
+     * @param integer $ttl
      */
-    public function set($key, $datas, $ttl = null): void
+    public function set(string $key, $datas, int $ttl = -1): void
     {
-        if (is_null($ttl)) {
+        if (-1 === $ttl) {
             $ttl = $this->DefaultTTL;
         }
 
         $cache = array(
             'created' => time(),
-            'ttl' => intval($ttl),
+            'ttl' => $ttl,
             'datas' => $datas
         );
 
@@ -100,7 +100,7 @@ class FileSystemCacheService
      * @param string $key
      * @return string
      */
-    private function getFile($key): string
+    private function getFile(string $key): string
     {
         if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
             $return = file_get_contents($this->getCacheFilePath($key));
@@ -114,7 +114,7 @@ class FileSystemCacheService
     /**
      * @param string $key
      */
-    private function deleteCacheFile($key)
+    private function deleteCacheFile(string $key): void
     {
         if ($this->Filesystem->exists($this->getCacheFilePath($key))) {
             $this->Filesystem->remove($this->getCacheFilePath($key));
@@ -125,7 +125,7 @@ class FileSystemCacheService
      * @param string $key
      * @return string
      */
-    private function getCacheFilePath($key): string
+    private function getCacheFilePath(string $key): string
     {
         return $this->PathToCache . '/' . $key . '.json';
     }
@@ -134,7 +134,7 @@ class FileSystemCacheService
      * @param string $path
      * @param string $cache
      */
-    private function writeCacheFile($path, $cache)
+    private function writeCacheFile(string $path, string $cache): void
     {
         if ($this->Filesystem->exists($path)) {
             $this->Filesystem->remove($path);
@@ -147,7 +147,7 @@ class FileSystemCacheService
      * @param array $content
      * @return string
      */
-    private function convertToCache($content): string
+    private function convertToCache(array $content): string
     {
         return json_encode($content);
     }
@@ -156,7 +156,7 @@ class FileSystemCacheService
      * @param string $content
      * @return array
      */
-    private function getDatasFromCache($content): array
+    private function getDatasFromCache(string $content): array
     {
         return json_decode($content, true);
     }
