@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 /**
- * Class FileSystemCacheService
+ * Class FileSystemCacheService.
  */
 class FileSystemCacheService
 {
@@ -33,9 +33,10 @@ class FileSystemCacheService
 
     /**
      * FileSystemCacheService constructor.
-     * @param string $cachePath
-     * @param string $cacheChmod
-     * @param int $cacheDefaultTTL
+     *
+     * @param string     $cachePath
+     * @param string     $cacheChmod
+     * @param int        $cacheDefaultTTL
      * @param Filesystem $Filesystem
      */
     public function __construct(string $cachePath, string $cacheChmod, int $cacheDefaultTTL, Filesystem $Filesystem)
@@ -55,6 +56,7 @@ class FileSystemCacheService
 
     /**
      * @param string $key
+     *
      * @return mixed
      */
     public function get(string $key)
@@ -77,8 +79,8 @@ class FileSystemCacheService
 
     /**
      * @param string $key
-     * @param mixed $datas
-     * @param integer $ttl
+     * @param mixed  $datas
+     * @param int    $ttl
      */
     public function set(string $key, $datas, int $ttl = -1): void
     {
@@ -89,7 +91,7 @@ class FileSystemCacheService
         $cache = array(
             'created' => time(),
             'ttl' => $ttl,
-            'datas' => $datas
+            'datas' => $datas,
         );
 
         $cache = $this->convertToCache($cache);
@@ -98,6 +100,7 @@ class FileSystemCacheService
 
     /**
      * @param string $key
+     *
      * @return string
      */
     private function getFile(string $key): string
@@ -123,11 +126,12 @@ class FileSystemCacheService
 
     /**
      * @param string $key
+     *
      * @return string
      */
     private function getCacheFilePath(string $key): string
     {
-        return $this->PathToCache . '/' . $key . '.json';
+        return $this->PathToCache.'/'.$key.'.json';
     }
 
     /**
@@ -145,6 +149,7 @@ class FileSystemCacheService
 
     /**
      * @param array $content
+     *
      * @return string
      */
     private function convertToCache(array $content): string
@@ -154,6 +159,7 @@ class FileSystemCacheService
 
     /**
      * @param string $content
+     *
      * @return array
      */
     private function getDatasFromCache(string $content): array

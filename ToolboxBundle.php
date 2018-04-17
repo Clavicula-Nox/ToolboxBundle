@@ -14,8 +14,7 @@ namespace ClaviculaNox\ToolboxBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ToolboxBundle
- * @package ClaviculaNox\ToolboxBundle
+ * Class ToolboxBundle.
  */
 class ToolboxBundle extends Bundle
 {

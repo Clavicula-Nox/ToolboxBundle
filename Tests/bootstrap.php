@@ -29,6 +29,6 @@ include __DIR__.'/App/AppKernel.php';
 $kernel = new AppKernel('test', true);
 $kernel->boot();
 
-$application  = new Application($kernel);
+$application = new Application($kernel);
 
 $kernel->shutdown();
