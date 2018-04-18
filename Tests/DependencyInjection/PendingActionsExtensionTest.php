@@ -24,8 +24,8 @@ class PendingActionsExtensionTest extends KernelTestCase
     {
         $builder = new ContainerBuilder();
         $params = [
-            'fs_system_cache_path' => "%kernel.root_dir%/../../build/cache/toolboxbundle",
-            'fs_system_cache_path_chmod' => "06644",
+            'fs_system_cache_path' => '%kernel.root_dir%/../../build/cache/toolboxbundle',
+            'fs_system_cache_path_chmod' => '06644',
             'fs_system_cache_path_default_ttl' => 3600,
         ];
 
@@ -34,9 +34,8 @@ class PendingActionsExtensionTest extends KernelTestCase
             'toolbox' => $params,
         ], $builder);
 
-        foreach ($params as $key => $value)
-        {
-            $param = $builder->getParameter('toolbox.' . $key);
+        foreach ($params as $key => $value) {
+            $param = $builder->getParameter('toolbox.'.$key);
             $this->assertEquals($param, $value);
         }
     }
