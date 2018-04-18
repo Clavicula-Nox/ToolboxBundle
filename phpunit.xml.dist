@@ -13,6 +13,7 @@
 
     <filter>
         <whitelist>
+            <directory suffix=".php">./DependencyInjection</directory>
             <directory suffix=".php">./Services</directory>
             <directory suffix=".php">./Tools</directory>
         </whitelist>
