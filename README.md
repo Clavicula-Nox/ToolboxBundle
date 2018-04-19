@@ -6,6 +6,9 @@ ToolboxBundle
 [![License](https://poser.pugx.org/clavicula-nox/toolbox-bundle/license)](https://packagist.org/packages/clavicula-nox/toolbox-bundle)
 [![Total Downloads](https://poser.pugx.org/clavicula-nox/toolbox-bundle/downloads)](https://packagist.org/packages/clavicula-nox/toolbox-bundle)
 [![Symfony](https://img.shields.io/badge/Symfony-%203.4%20&%204.x-green.svg "Supports Symfony 3.4 & 4.x")](https://symfony.com/)
+[![codecov](https://codecov.io/gh/Clavicula-Nox/ToolboxBundle/branch/master/graph/badge.svg)](https://codecov.io/gh/Clavicula-Nox/ToolboxBundle)
+[![Build Status](https://travis-ci.org/Clavicula-Nox/ToolboxBundle.svg?branch=master)](https://travis-ci.org/Clavicula-Nox/ToolboxBundle)
+
 
 **Requirements**
 

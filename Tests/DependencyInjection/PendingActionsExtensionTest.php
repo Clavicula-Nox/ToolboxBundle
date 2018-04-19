@@ -11,8 +11,10 @@
 
 namespace ClaviculaNox\PendingActionsBundle\Tests\DependencyInjection;
 
+use ClaviculaNox\ToolboxBundle\DependencyInjection\Configuration;
 use ClaviculaNox\ToolboxBundle\DependencyInjection\ToolboxExtension;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -20,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class PendingActionsExtensionTest extends KernelTestCase
 {
-    public function testInjection()
+    public function testInjection(): void
     {
         $builder = new ContainerBuilder();
         $params = [
@@ -37,6 +39,27 @@ class PendingActionsExtensionTest extends KernelTestCase
         foreach ($params as $key => $value) {
             $param = $builder->getParameter('toolbox.'.$key);
             $this->assertEquals($param, $value);
+        }
+    }
+
+    public function testEmptyParam(): void
+    {
+        $builder = new ContainerBuilder();
+        $params = [
+            'fs_system_cache_path' => '',
+            'fs_system_cache_path_chmod' => '06644',
+            'fs_system_cache_path_default_ttl' => 3600,
+        ];
+
+        try {
+            $ext = new ToolboxExtension();
+            $ext->load([
+                'toolbox' => $params,
+            ], $builder);
+
+            $this->fail('Expected Exception has not been raised.');
+        } catch (InvalidConfigurationException $e) {
+            $this->assertEquals($e->getMessage(), Configuration::PATH_VALUE_EMPTY);
         }
     }
 }
