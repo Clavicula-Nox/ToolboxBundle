@@ -21,6 +21,7 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 class Configuration implements ConfigurationInterface
 {
     const PATH_VALUE_EMPTY = 'Toolbox cache path value is empty.';
+
     /**
      * @return TreeBuilder
      */
