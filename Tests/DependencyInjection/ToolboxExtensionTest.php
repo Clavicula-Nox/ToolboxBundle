@@ -1,7 +1,7 @@
 <?php
 
 /*
-* This file is part of the PendingActionsBundle.
+* This file is part of the ToolboxBundle.
 *
 * (c) Adrien Lochon <adrien@claviculanox.io>
 *
@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace ClaviculaNox\PendingActionsBundle\Tests\DependencyInjection;
+namespace ClaviculaNox\ToolboxBundle\Tests\DependencyInjection;
 
 use ClaviculaNox\ToolboxBundle\DependencyInjection\Configuration;
 use ClaviculaNox\ToolboxBundle\DependencyInjection\ToolboxExtension;
@@ -18,9 +18,9 @@ use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Class PendingActionsExtensionTest.
+ * Class ToolboxExtensionTest.
  */
-class PendingActionsExtensionTest extends KernelTestCase
+class ToolboxExtensionTest extends KernelTestCase
 {
     public function testInjection(): void
     {
