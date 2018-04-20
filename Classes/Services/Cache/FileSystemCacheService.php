@@ -51,6 +51,8 @@ class FileSystemCacheService
             if (!is_writable($this->PathToCache)) {
                 throw new AccessDeniedException($this->PathToCache);
             }
+        } elseif (!is_writable($this->PathToCache)) {
+            throw new AccessDeniedException($this->PathToCache);
         }
     }
 
