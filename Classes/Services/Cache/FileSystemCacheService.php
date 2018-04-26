@@ -96,7 +96,7 @@ class FileSystemCacheService
         if (-1 === $ttl) {
             $ttl = $this->DefaultTTL;
         }
-        $cache = FileSystemCacheService::$CacheArray;
+        $cache = self::$CacheArray;
         $cache['created'] = time();
         $cache['ttl'] = $ttl;
         $cache['datas'] = $datas;
@@ -173,7 +173,7 @@ class FileSystemCacheService
     {
         $cache = json_decode($content, true);
         if (!is_array($cache)) {
-            $cache = FileSystemCacheService::$CacheArray;
+            $cache = self::$CacheArray;
         }
 
         return $cache;
