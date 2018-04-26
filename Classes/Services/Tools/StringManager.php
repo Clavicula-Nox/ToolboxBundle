@@ -203,10 +203,10 @@ class StringManager
     public function stringToLabel(string $string): string
     {
         $string = self::washString($string);
-        $toReplace = [',', ';', '.', ':', '°', '-', '_', "'", '"', '&', ' ', '/', '\\', '@', '$', '%', '£', '¤', 'µ', '*', '!', '§'];
-        $string = str_replace($toReplace, ' ', $string);
         $string = self::removeAccents($string);
+        $string = self::cleanString($string);
         $stringArray = explode(' ', $string);
+
         foreach ($stringArray as $key => $value) {
             $stringArray[$key] = ucfirst(strtolower($value));
         }
