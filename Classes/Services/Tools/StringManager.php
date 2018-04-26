@@ -117,8 +117,6 @@ class StringManager
 
     /**
      * @param string $string
-     * @param bool   $keepTags
-     * @param array  $allowedTags
      *
      * @return string
      */
@@ -204,7 +202,6 @@ class StringManager
     {
         $string = self::washString($string);
         $string = self::removeAccents($string);
-        $string = self::cleanString($string);
         $stringArray = explode(' ', $string);
 
         foreach ($stringArray as $key => $value) {
@@ -212,6 +209,7 @@ class StringManager
         }
 
         $string = implode(' ', $stringArray);
+        $string = self::cleanString($string);
         $string = str_replace(' ', '', $string);
 
         return (string) $string;
