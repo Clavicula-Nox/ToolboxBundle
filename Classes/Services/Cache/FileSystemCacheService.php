@@ -31,6 +31,13 @@ class FileSystemCacheService
     /* @var Filesystem */
     private $Filesystem;
 
+    /* @var array */
+    private static $CacheArray = [
+        'created' => 0,
+        'ttl' => 0,
+        'datas' => null,
+    ];
+
     /**
      * FileSystemCacheService constructor.
      *
@@ -51,6 +58,8 @@ class FileSystemCacheService
             if (!is_writable($this->PathToCache)) {
                 throw new AccessDeniedException($this->PathToCache);
             }
+        } elseif (!is_writable($this->PathToCache)) {
+            throw new AccessDeniedException($this->PathToCache);
         }
     }
 
@@ -87,12 +96,10 @@ class FileSystemCacheService
         if (-1 === $ttl) {
             $ttl = $this->DefaultTTL;
         }
-
-        $cache = array(
-            'created' => time(),
-            'ttl' => $ttl,
-            'datas' => $datas,
-        );
+        $cache = self::$CacheArray;
+        $cache['created'] = time();
+        $cache['ttl'] = $ttl;
+        $cache['datas'] = $datas;
 
         $cache = $this->convertToCache($cache);
         $this->writeCacheFile($this->getCacheFilePath($key), $cache);
@@ -164,6 +171,11 @@ class FileSystemCacheService
      */
     private function getDatasFromCache(string $content): array
     {
-        return json_decode($content, true);
+        $cache = json_decode($content, true);
+        if (!is_array($cache)) {
+            $cache = self::$CacheArray;
+        }
+
+        return $cache;
     }
 }

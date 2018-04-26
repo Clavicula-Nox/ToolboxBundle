@@ -47,6 +47,9 @@ class CSVManager
             while (false !== ($line = fgetcsv($fileHandler, 4096, $delim))) {
                 $count = count($line);
                 for ($j = 0; $j < $count; ++$j) {
+                    if (!mb_detect_encoding($line[$j], 'UTF-8')) {
+                        $line[$j] = utf8_encode($line[$j]);
+                    }
                     $return[$i][$j] = $line[$j];
                 }
                 ++$i;

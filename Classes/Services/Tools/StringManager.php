@@ -84,8 +84,8 @@ class StringManager
     public function removeAccents($string)
     {
         $string = str_replace(
-            array('À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'à', 'á', 'â', 'ã', 'ä', 'å', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'È', 'É', 'Ê', 'Ë', 'è', 'é', 'ê', 'ë', 'Ç', 'ç', 'Ì', 'Í', 'Î', 'Ï', 'ì', 'í', 'î', 'ï', 'Ù', 'Ú', 'Û', 'Ü', 'ù', 'ú', 'û', 'ü', 'ÿ', 'Ñ', 'ñ'),
-            array('A', 'A', 'A', 'A', 'A', 'A', 'a', 'a', 'a', 'a', 'a', 'a', 'O', 'O', 'O', 'O', 'O', 'O', 'o', 'o', 'o', 'o', 'o', 'o', 'E', 'E', 'E', 'E', 'e', 'e', 'e', 'e', 'C', 'c', 'I', 'I', 'I', 'I', 'i', 'i', 'i', 'i', 'U', 'U', 'U', 'U', 'u', 'u', 'u', 'u', 'y', 'N', 'n'),
+            ['À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'à', 'á', 'â', 'ã', 'ä', 'å', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'È', 'É', 'Ê', 'Ë', 'è', 'é', 'ê', 'ë', 'Ç', 'ç', 'Ì', 'Í', 'Î', 'Ï', 'ì', 'í', 'î', 'ï', 'Ù', 'Ú', 'Û', 'Ü', 'ù', 'ú', 'û', 'ü', 'ÿ', 'Ñ', 'ñ'],
+            ['A', 'A', 'A', 'A', 'A', 'A', 'a', 'a', 'a', 'a', 'a', 'a', 'O', 'O', 'O', 'O', 'O', 'O', 'o', 'o', 'o', 'o', 'o', 'o', 'E', 'E', 'E', 'E', 'e', 'e', 'e', 'e', 'C', 'c', 'I', 'I', 'I', 'I', 'i', 'i', 'i', 'i', 'U', 'U', 'U', 'U', 'u', 'u', 'u', 'u', 'y', 'N', 'n'],
             $string
         );
 
@@ -117,8 +117,6 @@ class StringManager
 
     /**
      * @param string $string
-     * @param bool   $keepTags
-     * @param array  $allowedTags
      *
      * @return string
      */
@@ -203,15 +201,15 @@ class StringManager
     public function stringToLabel(string $string): string
     {
         $string = self::washString($string);
-        $toReplace = [',', ';', '.', ':', '°', '-', '_', "'", '"', '&', ' ', '/', '\\', '@', '$', '%', '£', '¤', 'µ', '*', '!', '§'];
-        $string = str_replace($toReplace, ' ', $string);
         $string = self::removeAccents($string);
         $stringArray = explode(' ', $string);
+
         foreach ($stringArray as $key => $value) {
             $stringArray[$key] = ucfirst(strtolower($value));
         }
 
         $string = implode(' ', $stringArray);
+        $string = self::cleanString($string);
         $string = str_replace(' ', '', $string);
 
         return (string) $string;
