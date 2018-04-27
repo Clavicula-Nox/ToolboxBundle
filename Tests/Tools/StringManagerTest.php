@@ -165,14 +165,14 @@ class StringManagerTest extends WebTestCase
         $test = $this
             ->getKernel()
             ->getContainer()
-            ->get('cn_toolbox.tools.string_manager')->startsWith($input, "Those");
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, 'Those');
 
         $this->assertTrue($test);
 
         $test = $this
             ->getKernel()
             ->getContainer()
-            ->get('cn_toolbox.tools.string_manager')->startsWith($input, "are");
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, 'are');
 
         $this->assertFalse($test);
     }
@@ -184,14 +184,14 @@ class StringManagerTest extends WebTestCase
         $test = $this
             ->getKernel()
             ->getContainer()
-            ->get('cn_toolbox.tools.string_manager')->endsWith($input, "Simple.");
+            ->get('cn_toolbox.tools.string_manager')->endsWith($input, 'Simple.');
 
         $this->assertTrue($test);
 
         $test = $this
             ->getKernel()
             ->getContainer()
-            ->get('cn_toolbox.tools.string_manager')->startsWith($input, "man.");
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, 'man.');
 
         $this->assertFalse($test);
     }
