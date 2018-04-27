@@ -240,7 +240,7 @@ class StringManager
      */
     public function startsWith(string $haystack, string $needle): bool
     {
-        return ($needle != '' && strpos($haystack, $needle) === 0);
+        return '' != $needle && 0 === strpos($haystack, $needle);
     }
 
     /**
@@ -249,8 +249,8 @@ class StringManager
      *
      * @return bool
      */
-    function endsWith(string $haystack, string $needle): bool
+    public function endsWith(string $haystack, string $needle): bool
     {
-        return ($needle === substr($haystack, -strlen($needle)));
+        return $needle === substr($haystack, -strlen($needle));
     }
 }
