@@ -231,4 +231,26 @@ class StringManager
 
         return $return;
     }
+
+    /**
+     * @param string $haystack
+     * @param string $needle
+     *
+     * @return bool
+     */
+    public function startsWith(string $haystack, string $needle): bool
+    {
+        return ($needle != '' && strpos($haystack, $needle) === 0);
+    }
+
+    /**
+     * @param string $haystack
+     * @param string $needle
+     *
+     * @return bool
+     */
+    function endsWith(string $haystack, string $needle): bool
+    {
+        return ($needle === substr($haystack, -strlen($needle)));
+    }
 }

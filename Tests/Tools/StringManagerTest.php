@@ -157,4 +157,42 @@ class StringManagerTest extends WebTestCase
         $this->assertTrue(is_string($test));
         $this->assertTrue(200 === strlen($test));
     }
+
+    public function testStartsWith(): void
+    {
+        $input = 'Those are my words man. Simple.';
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, "Those");
+
+        $this->assertTrue($test);
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, "are");
+
+        $this->assertFalse($test);
+    }
+
+    public function testEndsWith(): void
+    {
+        $input = 'Those are my words man. Simple.';
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->endsWith($input, "Simple.");
+
+        $this->assertTrue($test);
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, "man.");
+
+        $this->assertFalse($test);
+    }
 }
