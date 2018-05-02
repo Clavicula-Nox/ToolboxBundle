@@ -32,8 +32,6 @@ class StringManager
     public function washString(string $string): string
     {
         $string = str_replace('&nbsp;', ' ', $string);
-        $string = html_entity_decode($string, ENT_QUOTES, 'UTF-8');
-        $string = trim($string);
         $string = str_replace('«', '"', $string);
         $string = str_replace('»', '"', $string);
         $string = str_replace('“', '"', $string);
@@ -179,10 +177,10 @@ class StringManager
     public function niceSubStr(string $string, int $length = 200): string
     {
         if (strlen($string) > $length) {
-            $tmp = substr($string, 0, $length);
-            $lastPos = strrpos($tmp, ' ');
+            $tmp = mb_substr($string, 0, $length);
+            $lastPos = mb_strrpos($tmp, ' ');
             if ($lastPos) {
-                $return = substr($string, 0, $lastPos).'...';
+                $return = mb_substr($string, 0, $lastPos).'...';
             } else {
                 $return = $string;
             }
@@ -205,7 +203,7 @@ class StringManager
         $stringArray = explode(' ', $string);
 
         foreach ($stringArray as $key => $value) {
-            $stringArray[$key] = ucfirst(strtolower($value));
+            $stringArray[$key] = ucfirst(mb_strtolower($value));
         }
 
         $string = implode(' ', $stringArray);
@@ -240,7 +238,7 @@ class StringManager
      */
     public function startsWith(string $haystack, string $needle): bool
     {
-        return '' != $needle && 0 === strpos($haystack, $needle);
+        return '' != $needle && 0 === mb_strpos($haystack, $needle);
     }
 
     /**
@@ -251,6 +249,18 @@ class StringManager
      */
     public function endsWith(string $haystack, string $needle): bool
     {
-        return $needle === substr($haystack, -strlen($needle));
+        return $needle === mb_substr($haystack, -strlen($needle));
+    }
+
+    /**
+     * @param $string
+     *
+     * @return string
+     */
+    public function removeExtraSpaces($string): string
+    {
+        $string = trim($string);
+
+        return (string) preg_replace("/\s+/", ' ', $string);
     }
 }

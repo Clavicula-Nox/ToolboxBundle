@@ -195,4 +195,16 @@ class StringManagerTest extends WebTestCase
 
         $this->assertFalse($test);
     }
+
+    public function testRemoveExtraSpaces(): void
+    {
+        $input = 'Those      are my     words man. Simple.';
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->removeExtraSpaces($input);
+
+        $this->assertTrue('Those are my words man. Simple.' === $test);
+    }
 }
