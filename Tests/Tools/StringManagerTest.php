@@ -69,7 +69,7 @@ class StringManagerTest extends WebTestCase
         $this->assertTrue($output === $test);
     }
 
-    public function testRemoveCharsKeepInts(): void
+    public function testRemoveLetters(): void
     {
         $input = '1 : I have 31 apples and the 1st is the best one, but the 9th is good also.';
         $output = '13119';
@@ -77,7 +77,7 @@ class StringManagerTest extends WebTestCase
         $test = $this
             ->getKernel()
             ->getContainer()
-            ->get('cn_toolbox.tools.string_manager')->removeCharsKeepInts($input);
+            ->get('cn_toolbox.tools.string_manager')->removeLetters($input);
 
         $this->assertTrue($output === $test);
     }

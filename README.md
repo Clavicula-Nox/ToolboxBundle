@@ -1,5 +1,5 @@
 ToolboxBundle
-===================
+=============
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/52227642-f384-4a42-8669-f207bae22e6d/mini.png)](https://insight.sensiolabs.com/projects/c607d9d8-329b-461a-82f8-8ad30be60be8)
 [![Latest Stable Version](https://poser.pugx.org/clavicula-nox/toolbox-bundle/v/stable)](https://packagist.org/packages/clavicula-nox/toolbox-bundle)
@@ -51,3 +51,11 @@ class AppKernel extends Kernel
     // ...
 }
 ```
+
+Documentation
+-------------
+
+  * [File System Cache Service](Docs/FileSystemCacheService.md)
+  * [CSV Manager](Docs/CSVManager.md)
+  * [Int Manager](Docs/IntManager.md)
+  * [String Manager](Docs/StringManager.md)
