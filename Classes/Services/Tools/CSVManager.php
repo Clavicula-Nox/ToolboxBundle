@@ -33,18 +33,18 @@ class CSVManager
 
     /**
      * @param string $filePath
-     * @param string $delim
+     * @param string $delimiter
      *
      * @return array
      */
-    public function getCSV(string $filePath, string $delim = ';'): array
+    public function getCSV(string $filePath, string $delimiter = ';'): array
     {
         $return = [];
 
         if (false !== ($fileHandler = fopen($filePath, 'r'))) {
             $i = 0;
 
-            while (false !== ($line = fgetcsv($fileHandler, 4096, $delim))) {
+            while (false !== ($line = fgetcsv($fileHandler, 4096, $delimiter))) {
                 $count = count($line);
                 for ($j = 0; $j < $count; ++$j) {
                     if (!mb_detect_encoding($line[$j], 'UTF-8')) {
@@ -79,27 +79,27 @@ class CSVManager
      * @param array  $csvDatas
      * @param string $filePath
      * @param string $fileName
-     * @param string $delim
+     * @param string $delimiter
      * @param string $enclosure
      */
     public function writeCSV(
         array $csvDatas,
         string $filePath = '',
         string $fileName = '',
-        string $delim = ';',
+        string $delimiter = ';',
         string $enclosure = '"'): void
     {
-        $this->writeFile($this->generateCSV($csvDatas, $delim, $enclosure), $filePath, $fileName);
+        $this->writeFile($this->generateCSV($csvDatas, $delimiter, $enclosure), $filePath, $fileName);
     }
 
     /**
      * @param array  $datas
-     * @param string $delim
+     * @param string $delimiter
      * @param string $enclosure
      *
      * @return string
      */
-    public function generateCSV(array $datas, string $delim = ';', string $enclosure = '"'): string
+    public function generateCSV(array $datas, string $delimiter = ';', string $enclosure = '"'): string
     {
         if (is_null($enclosure)) {
             $enclosure = chr(0);
@@ -114,7 +114,7 @@ class CSVManager
                 }
             }
 
-            fputcsv($handle, $data, $delim, $enclosure);
+            fputcsv($handle, $data, $delimiter, $enclosure);
         }
 
         rewind($handle);

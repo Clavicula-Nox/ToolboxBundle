@@ -16,6 +16,7 @@ namespace ClaviculaNox\ToolboxBundle\Classes\Services\Tools;
  */
 class StringManager
 {
+    /* @var array */
     private static $charsList =
         [
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
@@ -25,192 +26,192 @@ class StringManager
         ];
 
     /**
-     * @param string $string
+     * @param string $input
      *
      * @return string
      */
-    public function washString(string $string): string
+    public function washString(string $input): string
     {
-        $string = str_replace('&nbsp;', ' ', $string);
-        $string = str_replace('«', '"', $string);
-        $string = str_replace('»', '"', $string);
-        $string = str_replace('“', '"', $string);
-        $string = str_replace('”', '"', $string);
-        $string = str_replace('…', '...', $string);
-        $string = str_replace('´', "'", $string);
-        $string = str_replace('‘', "'", $string);
-        $string = str_replace('’', "'", $string);
-        $string = str_replace('œ', 'oe', $string);
-        $string = str_replace(chr(197).chr(34), 'oe', $string);
-        $string = str_replace(chr(226).chr(128).chr(147), '-', $string);
-        $string = str_replace('Œ', 'OE', $string);
-        $string = str_replace('–', '-', $string);
-        $string = str_replace('•', '-', $string);
-        $string = str_replace('ň', 'n', $string);
-        $string = str_replace('Ÿ', 'Y', $string);
-        $string = str_replace('ž', 'z', $string);
-        $string = str_replace('ý', 'y', $string);
-        $string = str_replace('Ž', 'Z', $string);
-        $string = str_replace('Š', 'S', $string);
-        $string = str_replace('š', 's', $string);
-        $string = str_replace('›', '>', $string);
-        $string = str_replace('‹', '<', $string);
-        $string = str_replace('€', 'E', $string);
-        $string = str_replace(chr(226).chr(130).chr(172), '€', $string);
-        $string = str_replace(chr(195).chr(169), 'é', $string);
-        $string = str_replace(chr(195).chr(34), 'û', $string);
-        $string = str_replace(chr(195).chr(170), 'ê', $string);
-        $string = str_replace(chr(195).chr(168), 'è', $string);
-        $string = str_replace(chr(195).chr(32), 'à'.chr(32), $string);
-        $string = str_replace(chr(195).chr(162), 'â', $string);
-        $string = str_replace(chr(195).chr(69), 'à', $string);
-        $string = str_replace(chr(194).chr(34), '"', $string);
-        $string = str_replace(chr(226).chr(69).chr(153), "'", $string);
-        $string = str_replace(chr(226).chr(69).chr(166), '...', $string);
-        $string = str_replace(chr(195).chr(167), 'ç', $string);
+        $output = str_replace('&nbsp;', ' ', $input);
+        $output = str_replace('«', '"', $output);
+        $output = str_replace('»', '"', $output);
+        $output = str_replace('“', '"', $output);
+        $output = str_replace('”', '"', $output);
+        $output = str_replace('…', '...', $output);
+        $output = str_replace('´', "'", $output);
+        $output = str_replace('‘', "'", $output);
+        $output = str_replace('’', "'", $output);
+        $output = str_replace('œ', 'oe', $output);
+        $output = str_replace(chr(197).chr(34), 'oe', $output);
+        $output = str_replace(chr(226).chr(128).chr(147), '-', $output);
+        $output = str_replace('Œ', 'OE', $output);
+        $output = str_replace('–', '-', $output);
+        $output = str_replace('•', '-', $output);
+        $output = str_replace('ň', 'n', $output);
+        $output = str_replace('Ÿ', 'Y', $output);
+        $output = str_replace('ž', 'z', $output);
+        $output = str_replace('ý', 'y', $output);
+        $output = str_replace('Ž', 'Z', $output);
+        $output = str_replace('Š', 'S', $output);
+        $output = str_replace('š', 's', $output);
+        $output = str_replace('›', '>', $output);
+        $output = str_replace('‹', '<', $output);
+        $output = str_replace('€', 'E', $output);
+        $output = str_replace(chr(226).chr(130).chr(172), '€', $output);
+        $output = str_replace(chr(195).chr(169), 'é', $output);
+        $output = str_replace(chr(195).chr(34), 'û', $output);
+        $output = str_replace(chr(195).chr(170), 'ê', $output);
+        $output = str_replace(chr(195).chr(168), 'è', $output);
+        $output = str_replace(chr(195).chr(32), 'à'.chr(32), $output);
+        $output = str_replace(chr(195).chr(162), 'â', $output);
+        $output = str_replace(chr(195).chr(69), 'à', $output);
+        $output = str_replace(chr(194).chr(34), '"', $output);
+        $output = str_replace(chr(226).chr(69).chr(153), "'", $output);
+        $output = str_replace(chr(226).chr(69).chr(166), '...', $output);
+        $output = str_replace(chr(195).chr(167), 'ç', $output);
 
-        $string = trim($string);
+        $output = trim($output);
 
-        return (string) $string;
+        return (string) $output;
     }
 
     /**
-     * @param string $string
+     * @param string $input
      *
      * @return string
      */
-    public function removeAccents($string)
+    public function removeAccents(string $input): string
     {
-        $string = str_replace(
+        $output = str_replace(
             ['À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'à', 'á', 'â', 'ã', 'ä', 'å', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'È', 'É', 'Ê', 'Ë', 'è', 'é', 'ê', 'ë', 'Ç', 'ç', 'Ì', 'Í', 'Î', 'Ï', 'ì', 'í', 'î', 'ï', 'Ù', 'Ú', 'Û', 'Ü', 'ù', 'ú', 'û', 'ü', 'ÿ', 'Ñ', 'ñ'],
             ['A', 'A', 'A', 'A', 'A', 'A', 'a', 'a', 'a', 'a', 'a', 'a', 'O', 'O', 'O', 'O', 'O', 'O', 'o', 'o', 'o', 'o', 'o', 'o', 'E', 'E', 'E', 'E', 'e', 'e', 'e', 'e', 'C', 'c', 'I', 'I', 'I', 'I', 'i', 'i', 'i', 'i', 'U', 'U', 'U', 'U', 'u', 'u', 'u', 'u', 'y', 'N', 'n'],
-            $string
+            $input
         );
 
-        return (string) $string;
+        return (string) $output;
     }
 
     /**
-     * @param string $string
+     * @param string $input
      *
      * @return string
      */
-    public function removeCharsKeepInts($string)
+    public function removeLetters(string $input): string
     {
-        $string = self::cleanString($string);
-        $string = strtolower($string);
-        $string = str_replace(
+        $output = self::cleanString($input);
+        $output = strtolower($output);
+        $output = str_replace(
             [
                 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
             ],
             '',
-            $string
+            $output
         );
 
-        $string = str_replace(' ', '', $string);
+        $output = str_replace(' ', '', $output);
 
-        return (string) $string;
+        return (string) $output;
     }
 
     /**
-     * @param string $string
+     * @param string $input
      *
      * @return string
      */
-    public function cleanString($string)
+    public function cleanString(string $input): string
     {
-        $string = self::washString($string);
-        $string = self::removeAccents($string);
-        $string = str_replace(
+        $output = self::washString($input);
+        $output = self::removeAccents($output);
+        $output = str_replace(
             [
                 ',', ';', '.', ':', '°', '-', '_', "'", '"', '&', ' ', '/', '\\', '@', '$', '%', '£', '¤', 'µ', '*', '!',
                 '§', 'μ', '(', ')', '{', '}', '[', ']', '^', '¨', '?', '§',
             ],
             '',
-            $string
+            $output
         );
-        $string = trim($string);
+        $output = trim($output);
 
-        return (string) $string;
+        return (string) $output;
     }
 
     /**
-     * @param string $string
+     * @param string $input
      * @param array  $wordsList
      *
      * @return string
      */
-    public function deleteWordsFromString(string $string, array $wordsList): string
+    public function deleteWordsFromString(string $input, array $wordsList): string
     {
-        $string = ' '.$string.' ';
+        $output = ' '.$input.' ';
         foreach ($wordsList as $value) {
-            $string = preg_replace('/([[:space:][:punct:]]+)'.mb_strtolower($value).'([[:space:][:punct:]]+)/i', '\1\2', $string);
-            $string = str_replace('  ', ' ', $string);
+            $output = preg_replace('/([[:space:][:punct:]]+)'.mb_strtolower($value).'([[:space:][:punct:]]+)/i', '\1\2', $output);
+            $output = str_replace('  ', ' ', $output);
         }
 
-        $string = trim($string);
+        $output = trim($output);
 
-        return (string) $string;
+        return (string) $output;
     }
 
     /**
-     * @param string $string
+     * @param string $input
      *
      * @return string
      */
-    public function stripLineBreaks(string $string): string
+    public function stripLineBreaks(string $input): string
     {
-        $string = str_replace("\r", '', $string);
-        $string = str_replace("\n", '', $string);
-        $string = str_replace("\t", '', $string);
+        $output = str_replace("\r", '', $input);
+        $output = str_replace("\n", '', $output);
+        $output = str_replace("\t", '', $output);
 
-        return (string) $string;
+        return (string) $output;
     }
 
     /**
-     * @param string $string
+     * @param string $input
      * @param int    $length
      *
      * @return string
      */
-    public function niceSubStr(string $string, int $length = 200): string
+    public function niceSubStr(string $input, int $length = 200): string
     {
-        if (strlen($string) > $length) {
-            $tmp = mb_substr($string, 0, $length);
+        if (strlen($input) > $length) {
+            $tmp = mb_substr($input, 0, $length);
             $lastPos = mb_strrpos($tmp, ' ');
             if ($lastPos) {
-                $return = mb_substr($string, 0, $lastPos).'...';
+                $output = mb_substr($input, 0, $lastPos).'...';
             } else {
-                $return = $string;
+                $output = $input;
             }
 
-            return trim($return);
+            return trim($output);
         } else {
-            return $string;
+            return $input;
         }
     }
 
     /**
-     * @param string $string
+     * @param string $input
      *
      * @return string
      */
-    public function stringToLabel(string $string): string
+    public function stringToLabel(string $input): string
     {
-        $string = self::washString($string);
-        $string = self::removeAccents($string);
-        $stringArray = explode(' ', $string);
+        $output = self::washString($input);
+        $output = self::removeAccents($output);
+        $outputArray = explode(' ', $output);
 
-        foreach ($stringArray as $key => $value) {
-            $stringArray[$key] = ucfirst(mb_strtolower($value));
+        foreach ($outputArray as $key => $value) {
+            $outputArray[$key] = ucfirst(mb_strtolower($value));
         }
 
-        $string = implode(' ', $stringArray);
-        $string = self::cleanString($string);
-        $string = str_replace(' ', '', $string);
+        $output = implode(' ', $outputArray);
+        $output = self::cleanString($output);
+        $output = str_replace(' ', '', $output);
 
-        return (string) $string;
+        return (string) $output;
     }
 
     /**
@@ -253,14 +254,14 @@ class StringManager
     }
 
     /**
-     * @param $string
+     * @param string $input
      *
      * @return string
      */
-    public function removeExtraSpaces($string): string
+    public function removeExtraSpaces(string $input): string
     {
-        $string = trim($string);
+        $output = trim($input);
 
-        return (string) preg_replace("/\s+/", ' ', $string);
+        return (string) preg_replace("/\s+/", ' ', $output);
     }
 }
