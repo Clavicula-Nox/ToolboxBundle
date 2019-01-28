@@ -69,7 +69,7 @@ class StringManagerTest extends WebTestCase
         $this->assertTrue($output === $test);
     }
 
-    public function testRemoveCharsKeepInts(): void
+    public function testRemoveLetters(): void
     {
         $input = '1 : I have 31 apples and the 1st is the best one, but the 9th is good also.';
         $output = '13119';
@@ -77,7 +77,7 @@ class StringManagerTest extends WebTestCase
         $test = $this
             ->getKernel()
             ->getContainer()
-            ->get('cn_toolbox.tools.string_manager')->removeCharsKeepInts($input);
+            ->get('cn_toolbox.tools.string_manager')->removeLetters($input);
 
         $this->assertTrue($output === $test);
     }
@@ -156,5 +156,55 @@ class StringManagerTest extends WebTestCase
 
         $this->assertTrue(is_string($test));
         $this->assertTrue(200 === strlen($test));
+    }
+
+    public function testStartsWith(): void
+    {
+        $input = 'Those are my words man. Simple.';
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, 'Those');
+
+        $this->assertTrue($test);
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, 'are');
+
+        $this->assertFalse($test);
+    }
+
+    public function testEndsWith(): void
+    {
+        $input = 'Those are my words man. Simple.';
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->endsWith($input, 'Simple.');
+
+        $this->assertTrue($test);
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->startsWith($input, 'man.');
+
+        $this->assertFalse($test);
+    }
+
+    public function testRemoveExtraSpaces(): void
+    {
+        $input = 'Those      are my     words man. Simple.';
+
+        $test = $this
+            ->getKernel()
+            ->getContainer()
+            ->get('cn_toolbox.tools.string_manager')->removeExtraSpaces($input);
+
+        $this->assertTrue('Those are my words man. Simple.' === $test);
     }
 }
