@@ -7,7 +7,7 @@ public function washString(string $string): string
 Replace special chars to regular ones
 
 ```php
-public function removeAccents($string)
+public function removeAccents($string): string
 ```
 Remove accents from a string
 
