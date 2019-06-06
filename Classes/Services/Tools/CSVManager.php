@@ -66,7 +66,7 @@ class CSVManager
      * @param string $filePath
      * @param string $fileName
      */
-    private function writeFile(string $fileContent, string $filePath = '', string $fileName = ''): void
+    private function writeFile(string $fileContent, string $filePath, string $fileName): void
     {
         if ('UTF-8' != mb_detect_encoding($fileContent)) {
             $fileContent = utf8_encode($fileContent);
