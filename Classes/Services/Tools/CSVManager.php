@@ -87,7 +87,8 @@ class CSVManager
         string $filePath = '',
         string $fileName = '',
         string $delimiter = ';',
-        string $enclosure = '"'): void
+        string $enclosure = '"'
+    ): void
     {
         $this->writeFile($this->generateCSV($csvDatas, $delimiter, $enclosure), $filePath, $fileName);
     }

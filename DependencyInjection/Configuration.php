@@ -39,14 +39,14 @@ class Configuration implements ConfigurationInterface
                         ->ifString()
                         ->then(function ($value) {
                             if ('' == $value) {
-                                throw new InvalidConfigurationException(Configuration::PATH_VALUE_EMPTY);
+                                throw new InvalidConfigurationException(self::PATH_VALUE_EMPTY);
                             }
 
                             return $value;
                         })
                     ->end()
                 ->end()
-                ->scalarNode('fs_system_cache_path_chmod')
+                ->scalarNode('fs_system_cache_path_chmod') //Could be validated
                 ->end()
                 ->integerNode('fs_system_cache_path_default_ttl')
                     ->min(0)
